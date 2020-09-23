@@ -1,0 +1,109 @@
+@import 'common/iconfont';
+@import 'common/reset';
+
+html, body {
+    height: 100%;
+}
+
+
+@mixin flex-align($pos:center){
+    -ms-flex-align: $pos;
+    -webkit-align-items: $pos;
+    -webkit-box-align: $pos;
+    align-items: $pos; 
+}
+
+@mixin transform-rotate($deg: 45deg) {
+    -webkit-transform: rotate($deg);
+    -moz-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    -o-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+// 清除浮动，貌似最完美的解决方案
+/* clearfix */
+@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+    *height: 1%;
+}
+
+.top-line {
+    position: relative;
+    &:before {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #d9d9d9;
+        color: #d9d9d9;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+    }
+}
+.bottom-line {
+    position: relative;
+    &:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #d9d9d9;
+        color: #d9d9d9;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+    }
+}
+
+$color: #4eaffb;
+$bgColor: #f2f2f2;
+$cardBgColor: #fff;
+$borderColor: #e5e5e5;
+
+input::-webkit-input-placeholder, 
+textarea::-webkit-input-placeholder { 
+    color: #b2b1b1;
+}
+
+.weui_tabbar {
+    @include flex-align(center);
+    height: 49px;
+    // background-color: #f2f2f2;
+    // border-top: 1px solid #a6a6a6;
+    .weui_tabbar_item {
+        padding: 0;
+        .weui_tabbar_label {
+            font-size: 16px;
+        } 
+    }
+    .weui_tabbar_item.weui_bar_item_on {
+        .weui_tabbar_label {
+            color: $color;
+        }
+    }
+}
+
+.weui_tab_bd {
+    padding-bottom: 49px; 
+    background-color: $bgColor; 
+}
+
+/* 覆盖样式 */
+.toolbar .picker-button {
+    color: $color;
+}

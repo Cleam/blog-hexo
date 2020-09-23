@@ -5,6 +5,11 @@
   "hexo": {
     "version": "3.8.0"
   },
+  "scripts": {
+    "server": "hexo server",
+    "g": "hexo g",
+    "publish": "hexo publish"
+  },
   "dependencies": {
     "hexo": "^3.7.0",
     "hexo-codepen": "^0.1.1",

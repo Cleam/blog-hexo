@@ -1,7 +1,7 @@
 ---
 title: Javascript内建对象Math学习
 date: 2020-03-02 11:07:23
-tags:
+tags: JavaScript
 ---
 
 Math 既不能当做一般函数来调用，也不能用于 new 操作符来创建对象。
