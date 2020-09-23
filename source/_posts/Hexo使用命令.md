@@ -1,23 +1,10 @@
-# blog-hexo
+---
+title: Hexo使用命令
+date: 2020-09-23 18:02:05
+tags:
+---
 
-> 个人博客[https://blog.lizimu.top](https://blog.lizimu.top)或[https://cleam.github.io/](https://cleam.github.io/)
-
-## 开发
-
-```bash
-# 开发
-npm run dev
-
-# 打包预览
-npm run preview
-
-# 发布
-npm run deploy
-```
-
-## Hexo 命令
-
-1. new：新建一篇文章
+## new：新建一篇文章
 
 ```bash
 # new
@@ -32,7 +19,7 @@ hexo new [layout] <title>
 | `-r, --replace` | 如果存在同名文章，将其替换                    |
 | `-s, --slug`    | 文章的 Slug，作为新文章的文件名和发布后的 URL |
 
-2. server：启动服务
+## server：启动服务
 
 ```bash
 hexo server
@@ -43,7 +30,7 @@ hexo server
 | `-p, --port` | 重设端口                       |
 | `-l, --log`  | 启动日记记录，使用覆盖记录格式 |
 
-3. generate：生成静态文件
+## generate：生成静态文件
 
 ```bash
 hexo generate
@@ -58,13 +45,13 @@ hexo generate
 | `-f, --force`       | 强制重新生成文件<br/>Hexo 引入了差分机制，如果 public 目录存在，<br/>那么 hexo g 只会重新生成改动的文件。<br/>使用该参数的效果接近 `hexo clean && hexo generate` |
 | `-c, --concurrency` | 最大同时生成文件的数量，默认无限制                                                                                                                               |
 
-4. publish: 发表草稿
+## publish：发表草稿
 
 ```bash
 hexo publish [layout] <filename>
 ```
 
-5. deploy: 部署网站
+## deploy：部署网站
 
 ```bash
 hexo deploy
@@ -75,7 +62,7 @@ hexo deploy
 | ---------------- | ------------------------ |
 | `-g, --generate` | 部署之前预先生成静态文件 |
 
-6. render: 渲染文件
+## render：渲染文件
 
 ```bash
 hexo render <file1> [file2] ...
@@ -85,7 +72,7 @@ hexo render <file1> [file2] ...
 | -------------- | ------------ |
 | `-o, --output` | 设置输出路径 |
 
-7. migrate: 博客迁移
+## migrate：博客迁移
 
 ```bash
 hexo migrate <type>
@@ -93,7 +80,7 @@ hexo migrate <type>
 
 > 更多：https://hexo.io/zh-cn/docs/migration
 
-8. clean: 清除缓存
+## clean：清除缓存
 
 清除缓存文件 (db.json) 和已生成的静态文件 (public)
 
@@ -101,13 +88,13 @@ hexo migrate <type>
 hexo clean
 ```
 
-9. list: 列出网站资料
+## list：列出网站资料
 
 ```bash
 hexo list <type>
 ```
 
-10. version: 显示 hexo 版本
+## version：显示 hexo 版本
 
 ```bash
 hexo version
