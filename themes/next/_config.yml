@@ -69,7 +69,7 @@ footer:
     # If you want to animate the icon, set it to true.
     animated: false
     # Change the color of icon, using Hex Code.
-    color: '#808080'
+    color: "#808080"
 
   # If not defined, will be used `author` from Hexo main config.
   copyright:
@@ -91,6 +91,7 @@ footer:
   beian:
     enable: false
     icp:
+
 
   # -------------------------------------------------------------
   # Any custom text can be defined here.
@@ -323,7 +324,7 @@ codeblock:
 wechat_subscriber:
   enabled: true
   qcode: /uploads/qrcode_for_qdgcs_lzg.jpg
-  description: 欢迎您扫一扫上面的微信公众号，订阅我的博客！
+  description: 欢迎扫一扫订阅！
 
 # Reward
 # If true, reward would be displayed in every article by default.
@@ -363,7 +364,7 @@ post_edit:
 mobile_layout_economy: false
 
 # Android Chrome header panel color ($brand-bg / $headband-bg => $black-deep).
-android_chrome_color: '#222'
+android_chrome_color: "#222"
 
 # Custom Logo.
 # !!Only available for Default Scheme currently.
@@ -728,7 +729,7 @@ algolia_search:
   labels:
     input_placeholder: Search for Posts
     hits_empty: "We didn't find any results for the search: ${query}"
-    hits_stats: '${hits} results found in ${time} ms'
+    hits_stats: "${hits} results found in ${time} ms"
 
 # Local search
 # Dependencies: https://github.com/theme-next/hexo-generator-searchdb
@@ -785,7 +786,7 @@ tabs:
 # Dependencies: https://github.com/theme-next/theme-next-reading-progress
 reading_progress:
   enable: false
-  color: '#37c6c0'
+  color: "#37c6c0"
   height: 2px
 
 #! ---------------------------------------------------------------
@@ -852,7 +853,7 @@ pace_theme: pace-theme-minimal
 canvas_nest:
   enable: false
   onmobile: true # display on mobile or not
-  color: '0,0,255' # RGB values, use ',' to separate
+  color: "0,0,255" # RGB values, use ',' to separate
   opacity: 0.5 # the opacity of line: 0~1
   zIndex: -1 # z-index property of the background
   count: 99 # the number of lines
