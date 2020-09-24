@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "hexo server -p 4000",
     "preview": "hexo g && http-server -p 4001 public",
-    "deploy": "hexo g -d && bash blog.lizimu.top.sh"
+    "deploy": "hexo g -d"
   },
   "dependencies": {
     "hexo": "^3.7.0",
