@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "hexo server -p 4000",
     "preview": "hexo g && http-server -p 4001 public",
+    "clean": "hexo clean",
+    "list-post": "hexo list post",
     "deploy": "hexo g -d"
   },
   "dependencies": {
