@@ -15,6 +15,8 @@ npm run preview
 npm run deploy
 ```
 
+[常见编写技巧](./skill.md)
+
 ## Hexo 命令
 
 1. new：新建一篇文章
