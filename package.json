@@ -11,7 +11,7 @@
     "clean": "hexo clean",
     "list-post": "hexo list post",
     "build": "hexo g",
-    "deploy": "hexo g -d"
+    "deploy": "hexo g -d -f"
   },
   "dependencies": {
     "hexo": "^3.7.0",
