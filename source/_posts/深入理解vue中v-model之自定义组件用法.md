@@ -183,6 +183,8 @@ Vue.component('custom-count', {
 
 {% codepen cleam_lee mdPvWvY dark vue,result 300 %}
 
+## 总结
+
 自定义组件的 v-model 我们在 vue3 和 vue2 中都实现了一遍，而且也能发现其中的差异：
 
 1. vue3 默认属性名、事件名为：`modelValue`和`update:modelValue`；而 vue2 中则是：`value`和`input`；
