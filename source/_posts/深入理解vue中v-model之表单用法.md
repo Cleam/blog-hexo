@@ -1,5 +1,5 @@
 ---
-title: 深入理解vue中v-model之普通用法
+title: 深入理解vue中v-model之表单用法
 date: 2020-09-25 15:51:54
 tags: vue
 ---
@@ -42,7 +42,7 @@ tags: vue
 
 然后我们来看一个完整示例：
 
-{% codepen cleam_lee PoNVMPd light result 300 %}
+{% codepen cleam_lee PoNVMPd dark vue,result 400 %}
 
 可以看出，实现出来效果是一样的。（可以通过修改注释代码查看效果）
 
@@ -101,9 +101,8 @@ tags: vue
 
 **注意：**`checkbox组`得到的值是一个数组，而 `radio组`得到的是单个值。
 
-{% codepen cleam_lee YzqgOzQ light result 300 %}
+{% codepen cleam_lee YzqgOzQ dark vue,result 400 %}
 
 可以看出，针对`radio组`和`chackbox组`，我们一样可以通过自定义实现 v-model 的效果。
-接下来，我们看看`v-model`在自定义组件中的使用，以及对比其在 vue3 和 vue2 中的区别。
 
-请看下一篇文章：《深入理解 vue 中 v-model 之自定义组件用法》。
+接下来，我们看看`v-model`在自定义组件中的使用，以及对比其在 vue3 和 vue2 中的区别。请看下一篇文章：《深入理解 vue 中 v-model 之自定义组件用法》。
