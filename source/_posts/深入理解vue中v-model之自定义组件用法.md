@@ -1,46 +1,10 @@
 ---
-title: vue2和vue3的v-model
-date: 2020-09-25 15:51:54
+title: 深入理解vue中v-model之自定义组件用法
+date: 2020-09-27 00:01:57
 tags:
 ---
 
-> vue2 指 vue2.2.0+
-
-## v-model 普通用法
-
-普通用法，vue3 和 vue2 没区别。
-
-```html
-<template>
-  <div id="app">
-    <!-- input -->
-    <input v-model="msg" placeholder="请输入..." />
-    <p>消息: {{ msg }}</p></p>
-    <hr>
-    <!-- checkbox -->
-    <label>
-      <input type="checkbox" id="c1" value="apple" v-model="cv" />苹果
-    </label>
-    <label>
-      <input type="checkbox" id="c2" value="banner" v-model="cv" />香蕉
-    </label>
-    <p>水果: {{ cv }}</p>
-    <hr>
-    <!-- radio -->
-    <label>
-      <input type="radio" id="r1" value="male" v-model="rv" />男
-    </label>
-    <label>
-      <input type="radio" id="r2" value="female" v-model="rv" />女
-    </label>
-    <p>性别: {{ rv }}</p>
-  </div>
-</template>
-```
-
-{% codepen cleam_lee PoNVMPd light result 350 %}
-
-## 自定义组件的 v-model
+根据上一篇《深入理解 vue 中 v-model 之普通用法》基本对 v-model 有了比较深的理解，接下来我们看看它如何在自定义组件中使用。
 
 首先，我们知道下面两个用法等价的：
 
@@ -107,4 +71,4 @@ app.component('custom-count', {
 <custom-comp :value="msg" @input="msg = $event"></custom-comp>
 ```
 
-<未完待续>
+> 未完待续
