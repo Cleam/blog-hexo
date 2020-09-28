@@ -1,5 +1,5 @@
 ---
-title: 深入理解vue中v-model之表单用法
+title: 深入理解v-model之表单用法
 date: 2020-09-25 15:51:54
 tags: vue
 ---
