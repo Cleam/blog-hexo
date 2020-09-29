@@ -1,5 +1,5 @@
 ---
-title: 深入理解v-model之修饰符
+title: 深入理解v-model之修饰符（vue3和vue2对比分析）
 date: 2020-09-27 23:03:56
 tags: vue
 ---
@@ -92,12 +92,12 @@ app.component('my-component', {
 
 {% codepen cleam_lee zYqXwdP dark html,result 200 %}
 
-由于 vue3 支持组件同时绑定多个带参数的 v-model（不带参数的话是只有第一个 v-model 有效的），所以在带参数的情况下，修饰符属性命名就变成了`参数名 + "Modifiers"`，我们看下面代码：
+由于 vue3 支持组件同时绑定多个带参数的 v-model（不带参数的话只有第一个 v-model 是有效的），所以在带参数的情况下，修饰符属性命名就变成了`参数名 + "Modifiers"`，我们看下面代码：
 
 ```html
 <my-component
   v-model:first-name.capitalize="firstName"
-  v-model:last-name.reverse="lastName"
+  v-model:last-name.upper="lastName"
 ></my-component>
 ```
 
@@ -116,13 +116,59 @@ app.component('my-component', {
   `,
   created() {
     console.log(this.firstNameModifiers); // { capitalize: true }
-    console.log(this.firstNameModifiers); // { reverse: true }
+    console.log(this.lastNameModifiers); // { upper: true }
   },
 });
 ```
 
 上面代码中，我们的参数名是`firstName`和`lastName`，所以自定义组件接收到的修饰符属性由原来的`modelModifiers`修改为`firstNameModifiers`和`lastNameModifiers`。
 
-实现效果如下：
+下面我们来看[完整的实现](https://codepen.io/cleam_lee/pen/xxVeMBJ)：
 
-> TODO...
+```js
+// 创建APP
+const app = Vue.createApp({
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+    };
+  },
+});
+// 自定义组件
+app.component('my-component', {
+  props: ['firstName', 'firstNameModifiers', 'lastName', 'lastNameModifiers'],
+  template: `
+    <p>firstName: <input type="text" :value="firstName" @input="emitCapitalize"></p>
+    <p>lastName: <input type="text" :value="lastName" @input="emitReverse"></p>
+  `,
+  methods: {
+    emitCapitalize(e) {
+      let v = e.target.value;
+      if (this.firstNameModifiers.capitalize) {
+        v = v.charAt(0).toUpperCase() + v.slice(1);
+      }
+      this.$emit('update:firstName', v);
+    },
+    emitReverse(e) {
+      let v = e.target.value;
+      if (this.lastNameModifiers.upper) {
+        v = v.toUpperCase();
+      }
+      this.$emit('update:lastName', v);
+    },
+  },
+});
+// 挂载
+app.mount('#app');
+```
+
+{% codepen cleam_lee xxVeMBJ dark html,result 300 %}
+
+至此，v-model 在 vue2 和 vue3 中的应用就基本讲完了，欢迎大家留言或加微信（cleam_lee）讨论！
+
+> 汇总：
+>
+> 1. [深入理解 v-model 之表单用法（vue3 和 vue2 对比分析）](https://juejin.im/post/6877143018160259085)
+> 2. [深入理解 v-model 之自定义组件用法（vue3 和 vue2 对比分析）](https://juejin.im/post/6877383634349719565)
+> 3. [深入理解 v-model 之修饰符（vue3 和 vue2 对比分析）](https://juejin.im/post/6877745193097887751)
