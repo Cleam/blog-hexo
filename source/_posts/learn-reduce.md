@@ -1,5 +1,5 @@
 ---
-title: Learn Array.reduce
+title: 学会 Array.reduce
 date: 2018-11-22 14:00:36
 tags: JavaScript
 ---
