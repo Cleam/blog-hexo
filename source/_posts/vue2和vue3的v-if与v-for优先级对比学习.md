@@ -13,7 +13,7 @@ Vue.js 中使用最多的两个指令就是 `v-if` 和 `v-for`，因此我们可
 
 接下来我们通过一个简单的示例来感知下，假设我们想要实现一个极简的 todoList 效果：
 
-![todolist](/images/post/todolist.png)
+![todolist](/uploads/post/todolist.png)
 
 我们有一个 todoList：
 
