@@ -91,7 +91,7 @@ function patch(oldVDom, newVDom) {
           mount(child, el);
         });
       } else {
-        el.innerHTML = '';
+        // el.innerHTML = '';
         const commonLength = Math.min(oldChildren.length, newChildren.length);
         for (let i = 0; i < commonLength; i++) {
           // mount(newChildren[i], el)
@@ -170,7 +170,7 @@ function getDep(target, key) {
 //   }
 //   return dep;
 // }
-const _proxyHandler = {
+const _reactiveHandler = {
   get(target, key, receiver) {
     const dep = getDep(target, key);
     dep.depend();
@@ -185,5 +185,5 @@ const _proxyHandler = {
   },
 };
 function reactive(raw) {
-  return new Proxy(raw, _proxyHandler);
+  return new Proxy(raw, _reactiveHandler);
 }
