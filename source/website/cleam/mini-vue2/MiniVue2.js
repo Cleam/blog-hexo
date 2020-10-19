@@ -6,9 +6,13 @@ function defineReactive(obj, key, value) {
   observe(value);
   Object.defineProperty(obj, key, {
     get() {
+      // 依赖收集 {key: () => {}}
+      // todo...
       return value;
     },
     set(newValue) {
+      // 依赖触发
+      // todo...
       observe(newValue);
       value = newValue;
     },
@@ -46,7 +50,12 @@ function get(obj, path) {
     let i = 0;
     let len = pathArr.length;
     while (obj !== null && i < len) {
-      obj = obj[pathArr[i++]];
+      try {
+        obj = obj[pathArr[i++]];
+      } catch (error) {
+        console.warn('[捕获错误信息]', error);
+        obj = null;
+      }
     }
     return obj;
   }
@@ -123,28 +132,28 @@ class Compile {
     return node.nodeType === Node.TEXT_NODE;
   }
 
-  compileText(node, obj) {
-    const textContent = node.textContent;
-    const matches1 = textContent.match(/\{\{\w+\}\}/g); // {{count}}
-    if (matches1) {
-      // console.log(matches1);
-      matches1.forEach((k) => {
-        const newKey = k.replace(/\{\{(\w+)\}\}/, '$1');
-        const re = new RegExp(`(\w*)${k}(\w*)`, 'g');
-        node.textContent = node.textContent.replace(re, `$1${this.vm[newKey]}$2`);
-      });
+  compileText(node) {
+    if (!document.body.contains(node)) {
+      return;
     }
-    const matches2 = textContent.match(/\{\{\w+\.[\w|\.]+\}\}/g); // ["{{obj.foo.bar}}", "{{obj.baz}}"] or null
-    if (matches2) {
-      console.log(matches2);
-      matches2.forEach((exp) => {
+    const textContent = node.textContent;
+    const matches = textContent.match(/\{\{\S+(\.\S)*\}\}/g); // {{count}}
+    if (matches) {
+      // console.log(matches);
+      matches.forEach((exp) => {
         const rawExp = exp.replace(/\{\{(.*)\}\}/, '$1');
-        // console.log(rawExp, get(this.vm, rawExp));
+        const re = new RegExp(`(\w*)${exp}(\w*)`, 'g');
+        const value = get(this.vm, rawExp);
+        console.log(rawExp + ': ' + value);
+        node.textContent = node.textContent.replace(re, `$1${value}$2`);
       });
     }
   }
 
   compileElement(node) {
+    if (!document.body.contains(node)) {
+      return;
+    }
     for (const attr of node.attributes) {
       if (attr.name.startsWith('v-')) {
         const attrs = attr.name.slice(2).split(':');
@@ -194,12 +203,27 @@ class Compile {
     if (/(\w+)\s+in\s+(\w+)/.test(expression)) {
       // const item = RegExp.$1;
       const list = this.vm[RegExp.$2]; // list
+      const compileText = function (n, i) {
+        const textContent = n.textContent;
+        const matches = textContent.match(/\{\{\S+(\.\S)*\}\}/g); // {{count}}
+        if (matches) {
+          matches.forEach((exp) => {
+            const rawExp = exp.replace(/\{\{(.*)\}\}/, '$1');
+            const re = new RegExp(`(\w*)${exp}(\w*)`, 'g');
+            const value = get(i, rawExp.split('.').slice(1).join('.'));
+            console.log(rawExp + ': ' + value);
+            n.textContent = n.textContent.replace(re, `$1${value}$2`);
+          });
+        }
+      };
       for (const key in list) {
         const item = list[key];
         const itemEl = document.createElement(tag); // li
         const path = node.getAttribute('v-bind:key').split('.').slice(1).join('.'); // item.id but maybe item.a.id
         itemEl.setAttribute('key', get(item, path));
-        // this.compileText(itemEl, item);
+        itemEl.textContent = node.textContent;
+        // console.log(item);
+        compileText(itemEl, item);
         node.parentNode.appendChild(itemEl);
       }
       node.remove();

@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mini vue2</title>
+    <style>
+      .red {
+        color: red;
+      }
+      .green {
+        color: green;
+      }
+      .if-wrap {
+        padding: 10px;
+        background-color: antiquewhite;
+      }
+    </style>
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <script src="./MiniVue2.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mini vue2</title>
-  <style>
-    .red {
-      color: red;
-    }
-  </style>
-  <!-- <script src="https://unpkg.com/vue@next"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
-  <script src="./MiniVue2.js"></script>
-
-</head>
-
-<body>
-  <div id="app">
-    {{count}} - {{obj.foo.bar}} - {{obj.baz}}
-    <p id="p">声明绑定：{{count}}</p>
-    <!-- v-on指令： -->
-    <p><button v-on:click="handleClick">+1</button></p>
-    <!-- <p>v-if指令：</p> -->
-    <div v-if="showList">
-      <!-- <p>v-for v-bind以及声明绑定：</p> -->
-      <ul>
-        <li v-for="item in list" v-bind:key="item.id">{{item.msg}}</li>
-        <!-- <li key='0'>hello</li>
-        <li key='1'>mini</li>
-        <li key='2'>vue2</li> -->
-      </ul>
+  <body>
+    <div id="app">
+      <!-- 暂不支持：{{obj.foo.bar}} - {{obj.baz}} -->
+      <p id="p">声明绑定：{{count}} - {{obj.foo.bar}} - {{obj.baz}}</p>
+      <p><button v-on:click="handleClick">+1</button></p>
+      <div class="if-wrap" v-if="shown">
+        <p>条件显示</p>
+        <ul>
+          <li v-for="item in list" v-bind:key="item.id">{{item.msg}}</li>
+        </ul>
+      </div>
+      <!-- v-on指令： -->
+      <p><button v-on:click="toggleShown">toggle shown</button></p>
+      <p class="vhtml">v-html指令：<span v-html="rawHtml"></span></p>
+      <p class="vtext">v-text指令：<span class="green" v-text="msg"></span></p>
     </div>
-    <!-- v-on指令： -->
-    <p><button v-on:click="toggleList">toggle list</button></p>
-    <p class="vhtml">v-html指令：<span v-html="rawHtml"></span></p>
-    <p class="vtext">v-text指令：<span v-text="msg"></span></p>
-  </div>
 
-  <script>
-    const vm = new Vue({
-      el: '#app',
-      data() {
-        return {
-          count: 0,
-          count2: 1,
-          obj: {
-            baz: 'bazzzzz',
-            foo: {
-              bar: 'barrrrrrr'
-            }
-          },
-          showList: true,
-          rawHtml: '<span class="red">我是红色的</span>',
-          msg: '我是v-text指令生成的',
-          list: [{ id: 0, msg: 'Hello' }, { id: 1, msg: 'mini' }, { id: 2, msg: 'vue2' }]
-        }
-      },
-      methods: {
-        handleClick() {
-          this.count++;
-          console.log('[handleClick]', this.count);
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data() {
+          return {
+            count: 0,
+            count2: 1,
+            shown: true,
+            rawHtml: '<span class="red">我是红色的</span>',
+            msg: '我是v-text指令生成的',
+            obj: {
+              baz: 'bazzzzz',
+              foo: {
+                bar: 'barrrrrrr',
+              },
+            },
+            list: [
+              { id: 0, msg: 'Hello' },
+              { id: 1, msg: 'mini' },
+              { id: 2, msg: 'vue2' },
+            ],
+          };
         },
-        toggleList() {
-          this.showList = !this.showList;
-          console.log('[toggleList]', this.showList);
-        }
-      },
-    });
-
-    console.log(vm);
-  </script>
-
-
-</body>
-
+        methods: {
+          handleClick() {
+            this.count++;
+            console.log('[handleClick]', this.count);
+          },
+          toggleShown() {
+            this.showList = !this.showList;
+            console.log('[toggleShown]', this.showList);
+          },
+        },
+      });
+      console.log(vm);
+    </script>
+  </body>
 </html>
