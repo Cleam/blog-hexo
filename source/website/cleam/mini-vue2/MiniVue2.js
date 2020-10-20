@@ -4,17 +4,23 @@ function isObject(obj) {
 
 function defineReactive(obj, key, value) {
   observe(value);
+
+  // key和dep一一对应, 每个key有一个唯一的dep示例来管理watchers
+  const dep = new Dep();
+
   Object.defineProperty(obj, key, {
     get() {
-      // 依赖收集 {key: () => {}}
-      // todo...
+      // 依赖收集
+      Dep.target && dep.addDep(Dep.target);
+      // console.log('[getter key]', key);
       return value;
     },
     set(newValue) {
-      // 依赖触发
-      // todo...
       observe(newValue);
       value = newValue;
+      // 依赖触发
+      // window.watches.forEach((w) => w.update());
+      dep.notify();
     },
   });
 }
@@ -136,19 +142,37 @@ class Compile {
     if (!document.body.contains(node)) {
       return;
     }
-    const textContent = node.textContent;
-    const matches = textContent.match(/\{\{\S+(\.\S)*\}\}/g); // {{count}}
-    if (matches) {
-      // console.log(matches);
-      matches.forEach((exp) => {
-        const rawExp = exp.replace(/\{\{(.*)\}\}/, '$1');
-        const re = new RegExp(`(\w*)${exp}(\w*)`, 'g');
-        const value = get(this.vm, rawExp);
-        console.log(rawExp + ': ' + value);
-        node.textContent = node.textContent.replace(re, `$1${value}$2`);
+    if (/\{\{(\S+)\}\}/.test(node.textContent)) {
+      const exp = RegExp.$1;
+      this.update(node, get(this.vm, exp));
+      new Watcher(this.vm, exp, (val) => {
+        this.update(node, val);
       });
     }
   }
+
+  update(node, val) {
+    // 最简单粗暴的实现
+    node.textContent = val;
+  }
+
+  // compileText(node) {
+  //   if (!document.body.contains(node)) {
+  //     return;
+  //   }
+  //   const textContent = node.textContent;
+  //   const matches = textContent.match(/\{\{\S+(\.\S)*\}\}/g); // {{count}}
+  //   if (matches) {
+  //     // console.log(matches);
+  //     matches.forEach((exp) => {
+  //       const rawExp = exp.replace(/\{\{(.*)\}\}/, '$1');
+  //       const re = new RegExp(`(\w*)${exp}(\w*)`, 'g');
+  //       const value = get(this.vm, rawExp);
+  //       console.log(rawExp + ': ' + value);
+  //       node.textContent = node.textContent.replace(re, `$1${value}$2`);
+  //     });
+  //   }
+  // }
 
   compileElement(node) {
     if (!document.body.contains(node)) {
@@ -168,66 +192,102 @@ class Compile {
   handleDirectiveText(node) {
     // console.log(node);
     const attrName = 'v-text';
-    node.textContent = this.vm[node.getAttribute(attrName)];
+    const key = node.getAttribute(attrName);
     node.removeAttribute(attrName);
+    this.update(node, this.vm[key]);
+    new Watcher(this.vm, key, (val) => {
+      this.update(node, val);
+    });
   }
   handleDirectiveHtml(node) {
     // console.log(node);
     const attrName = 'v-html';
-    node.innerHTML = this.vm[node.getAttribute(attrName)];
+    const key = node.getAttribute(attrName);
     node.removeAttribute(attrName);
+    node.innerHTML = this.vm[key];
+    new Watcher(this.vm, key, (val) => {
+      node.innerHTML = val;
+    });
   }
-  handleDirectiveBind(node, attr) {
-    console.log(attr);
-  }
+
   handleDirectiveOn(node, eventName) {
     // console.log(eventName);
     const attrName = `v-on:${eventName}`;
     node.addEventListener(eventName, this.vm[node.getAttribute(attrName)].bind(this.vm));
     node.removeAttribute(attrName);
   }
-  handleDirectiveIf(node) {
-    // console.log(node);
-    const attrName = 'v-if';
-    const value = this.vm[node.getAttribute(attrName)];
-    if (!value) {
-      node.remove();
-    }
-    node.removeAttribute(attrName);
+  
+  // handleDirectiveIf(node) {
+  //   // console.log(node);
+  //   const attrName = 'v-if';
+  //   const value = this.vm[node.getAttribute(attrName)];
+  //   if (!value) {
+  //     node.remove();
+  //   }
+  //   node.removeAttribute(attrName);
+  // }
+  // handleDirectiveFor(node) {
+  //   // console.log(node);
+  //   const attrName = 'v-for';
+  //   const expression = node.getAttribute(attrName);
+  //   const tag = node.tagName.toLowerCase();
+  //   if (/(\w+)\s+in\s+(\w+)/.test(expression)) {
+  //     // const item = RegExp.$1;
+  //     const list = this.vm[RegExp.$2]; // list
+  //     const compileText = function (n, i) {
+  //       const textContent = n.textContent;
+  //       const matches = textContent.match(/\{\{\S+(\.\S)*\}\}/g); // {{count}}
+  //       if (matches) {
+  //         matches.forEach((exp) => {
+  //           const rawExp = exp.replace(/\{\{(.*)\}\}/, '$1');
+  //           const re = new RegExp(`(\w*)${exp}(\w*)`, 'g');
+  //           const value = get(i, rawExp.split('.').slice(1).join('.'));
+  //           // console.log(rawExp + ': ' + value);
+  //           n.textContent = n.textContent.replace(re, `$1${value}$2`);
+  //         });
+  //       }
+  //     };
+  //     for (const key in list) {
+  //       const item = list[key];
+  //       const itemEl = document.createElement(tag); // li
+  //       const path = node.getAttribute('v-bind:key').split('.').slice(1).join('.'); // item.id but maybe item.a.id
+  //       itemEl.setAttribute('key', get(item, path));
+  //       itemEl.textContent = node.textContent;
+  //       // console.log(item);
+  //       compileText(itemEl, item);
+  //       node.parentNode.appendChild(itemEl);
+  //     }
+  //     node.remove();
+  //   }
+  //   node.removeAttribute(attrName);
+  // }
+}
+
+// window.watches = [];
+class Watcher {
+  constructor(vm, key, updateFn) {
+    this.vm = vm;
+    this.key = key;
+    this.updateFn = updateFn;
+    // 在获取绑定的状态数据时，将每个数据对应的依赖收集起来。
+    Dep.target = this; // 巧妙的设计
+    this.vm[this.key]; // 触发getter
+    Dep.target = null;
+    // window.watches.push(this);
   }
-  handleDirectiveFor(node) {
-    // console.log(node);
-    const attrName = 'v-for';
-    const expression = node.getAttribute(attrName);
-    const tag = node.tagName.toLowerCase();
-    if (/(\w+)\s+in\s+(\w+)/.test(expression)) {
-      // const item = RegExp.$1;
-      const list = this.vm[RegExp.$2]; // list
-      const compileText = function (n, i) {
-        const textContent = n.textContent;
-        const matches = textContent.match(/\{\{\S+(\.\S)*\}\}/g); // {{count}}
-        if (matches) {
-          matches.forEach((exp) => {
-            const rawExp = exp.replace(/\{\{(.*)\}\}/, '$1');
-            const re = new RegExp(`(\w*)${exp}(\w*)`, 'g');
-            const value = get(i, rawExp.split('.').slice(1).join('.'));
-            console.log(rawExp + ': ' + value);
-            n.textContent = n.textContent.replace(re, `$1${value}$2`);
-          });
-        }
-      };
-      for (const key in list) {
-        const item = list[key];
-        const itemEl = document.createElement(tag); // li
-        const path = node.getAttribute('v-bind:key').split('.').slice(1).join('.'); // item.id but maybe item.a.id
-        itemEl.setAttribute('key', get(item, path));
-        itemEl.textContent = node.textContent;
-        // console.log(item);
-        compileText(itemEl, item);
-        node.parentNode.appendChild(itemEl);
-      }
-      node.remove();
-    }
-    node.removeAttribute(attrName);
+  update() {
+    this.updateFn.call(this.vm, this.vm[this.key]);
+  }
+}
+
+class Dep {
+  constructor() {
+    this.deps = [];
+  }
+  addDep(dep) {
+    this.deps.push(dep);
+  }
+  notify() {
+    this.deps.forEach((dep) => dep.update());
   }
 }
