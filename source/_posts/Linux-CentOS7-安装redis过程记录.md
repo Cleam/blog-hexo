@@ -1,7 +1,7 @@
 ---
 title: Linux（CentOS 7）安装redis过程记录
 date: 2020-12-10 17:21:49
-tags: redis,运维
+tags: 运维
 ---
 
 > 前两步非必须，因为我的系统是新的，所以需要做一些配置和更新。
