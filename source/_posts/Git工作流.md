@@ -23,6 +23,4 @@ Git 在用户管理变更方面提供了很大的灵活性，鉴于 Git 对灵�
 - GitFlow 工作流（GitFlow Workflow）
 - 分叉工作流（Forking Workflow）
 
-## 参考
-
-- [https://www.atlassian.com/git/tutorials/comparing-workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
+> [英文原文](https://www.atlassian.com/git/tutorials/comparing-workflows)

@@ -90,8 +90,7 @@ footer:
   # http://www.miitbeian.gov.cn
   beian:
     enable: false
-    icp:
-
+    icp: 湘ICP备19012454号-1
 
   # -------------------------------------------------------------
   # Any custom text can be defined here.
