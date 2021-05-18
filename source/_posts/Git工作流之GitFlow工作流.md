@@ -206,6 +206,6 @@ Gitflow 的总体流程为：
 6. 如果检测到`主分支（master）`出现问题，则会从主分支中创建一个`热修分支（hotfix）`;
 7. 热修分支完成后，将它`合并到master和develop`中。
 
-接下来，了解分《{% post_link Git工作流之分叉工作流 %}》
+接下来，了解分《{% post_link Git工作流之派生工作流 %}》
 
 > [英文原文](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)

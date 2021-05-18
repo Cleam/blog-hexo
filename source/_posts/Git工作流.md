@@ -21,6 +21,6 @@ Git 在用户管理变更方面提供了很大的灵活性，鉴于 Git 对灵�
 - 集中式工作流（Centralized Workflow）
 - 功能分支工作流（Feature Branch Workflow）
 - GitFlow 工作流（GitFlow Workflow）
-- 分叉工作流（Forking Workflow）
+- 派生工作流（Forking Workflow）
 
 > [英文原文](https://www.atlassian.com/git/tutorials/comparing-workflows)
