@@ -11,7 +11,7 @@
     "clean": "hexo clean",
     "list-post": "hexo list post",
     "build": "hexo g",
-    "deploy": "hexo g -d -f && git push github master"
+    "deploy": "hexo g -d -f && git add . && git commit -m 'update' && git push origin master && git push github master"
   },
   "dependencies": {
     "hexo": "^3.7.0",
