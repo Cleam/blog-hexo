@@ -23,4 +23,11 @@ Git 在用户管理变更方面提供了很大的灵活性，鉴于 Git 对灵�
 - GitFlow 工作流（GitFlow Workflow）
 - 派生工作流（Forking Workflow）
 
+![Centralized Workflow](/uploads/post/wf_Centralized.jpg)
+![Feature Branch Workflow](/uploads/post/wf_FeatureBranch.jpg)
+![GitFlow Workflow](/uploads/post/wf_GitFlow.jpg)
+![Forking Workflow](/uploads/post/wf_Forking.jpg)
+
+至于团队应该使用哪种工作流，这要取决于团队具体情况来定。**最好的不一定好，最适合的才最好**，不同团队有不同的工作流。像我们团队采用的工作流并非上面 4 选 1，而是结合（功能分支、派生工作流）起来形成了适合自己的工作流。
+
 > [英文原文](https://www.atlassian.com/git/tutorials/comparing-workflows)
