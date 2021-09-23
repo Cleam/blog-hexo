@@ -1,7 +1,9 @@
 ---
 title: Git工作流之GitFlow工作流
 date: 2021-05-17 15:12:15
-tags: git
+tags:
+  - git
+  - 翻译
 ---
 
 **GitFlow 工作流（GitFlow Workflow）**是一个 Git 工作流程，可帮助持续进行软件开发和实施 [DevOps](https://www.atlassian.com/devops/what-is-devops) 实践。它最初[由 Vincent Driessen 在 nive 上发行](http://nvie.com/posts/a-successful-git-branching-model/)并广受欢迎。Gitflow 工作流定义了围绕项目发行版设计的严格分支模型。这为管理**较大的项目**提供了一个强大的框架。

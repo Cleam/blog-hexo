@@ -1,7 +1,9 @@
 ---
 title: npm peerDependencies
 date: 2021-05-13 10:06:35
-tags: 翻译,npm
+tags:
+  - 翻译
+  - npm
 ---
 
 > 希望通过此文阐明当你要使用 npm 的时候知道什么是`npm peerDependencies`，弄明白什么时候以及为什么使用它。

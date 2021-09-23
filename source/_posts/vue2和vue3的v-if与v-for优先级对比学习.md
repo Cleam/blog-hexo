@@ -1,7 +1,7 @@
 ---
 title: vue2和vue3的v-if与v-for优先级对比学习
 date: 2020-10-09 14:07:12
-tags:
+tags: vue
 ---
 
 Vue.js 中使用最多的两个指令就是 `v-if` 和 `v-for`，因此我们可能会想要同时使用它们。虽然官方不建议这样做，但有时确实是必须的，我们来了解下他们的工作方式：
@@ -119,10 +119,10 @@ Vue.createApp({
   },
   computed: {
     finished() {
-      return todoList.filter(t => t.done);
+      return todoList.filter((t) => t.done);
     },
     todos() {
-      return todoList.filter(t => !t.done);
+      return todoList.filter((t) => !t.done);
     },
   },
 }).mount('#app');
@@ -139,10 +139,10 @@ new Vue({
   },
   computed: {
     finished() {
-      return todoList.filter(t => t.done);
+      return todoList.filter((t) => t.done);
     },
     todos() {
-      return todoList.filter(t => !t.done);
+      return todoList.filter((t) => !t.done);
     },
   },
 });

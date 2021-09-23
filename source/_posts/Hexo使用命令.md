@@ -1,7 +1,7 @@
 ---
 title: Hexo使用命令
 date: 2020-09-23 18:02:05
-tags:
+tags: hexo
 ---
 
 ## new：新建一篇文章

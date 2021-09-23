@@ -2,7 +2,9 @@
 title: Git工作流之功能分支工作流
 s: feature_branch_workflow
 date: 2021-05-15 18:15:22
-tags: git
+tags:
+  - git
+  - 翻译
 ---
 
 **Git 功能分支工作流（Feature Branch Workflow）**背后的核心思想是所有功能开发应在专用分支而不是`master`分支中进行。这种封装使多个开发人员可以轻松地使用特定功能，而又不会干扰主代码库。这也意味着`master`分支将永远不会包含残破的代码，这对于持续集成环境是一个巨大的优势。

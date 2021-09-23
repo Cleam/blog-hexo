@@ -2,7 +2,9 @@
 title: Git工作流之集中式工作流
 s: centralized_workflow
 date: 2021-05-14 10:12:22
-tags: git
+tags:
+  - git
+  - 翻译
 ---
 
 对于从 SVN 过渡的团队来说，集中式工作流（Centralized Workflow）是一个很棒的 Git 工作流。与[Subversion](https://subversion.apache.org/)一样，集中式工作流使用中央仓库作为项目所有更改的单个入口点。类比 svn 的 trunk，它 **使用`master`作为默认的开发分支且所有提交操作都在该分支上。** 这种工作流除了`master`分支外，不需要任何其他分支。
