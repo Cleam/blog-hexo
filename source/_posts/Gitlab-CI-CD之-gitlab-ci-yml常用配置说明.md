@@ -151,7 +151,7 @@ deploy_production:
     - master
 ```
 
-复用类配置：
+{% post_link Gitlab-CI-CD之-gitlab-ci-yml复用类配置%}：
 
 - Anchors
 - !reference
