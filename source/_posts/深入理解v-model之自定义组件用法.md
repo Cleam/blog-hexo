@@ -224,4 +224,4 @@ Vue.component('custom-count', {
 1. vue3 默认属性名、事件名为：`modelValue`和`update:modelValue`；而 vue2 中则是：`value`和`input`；
 2. vue3 中直接通过 v-model 后面参数`v-model:foo`来指定属性名，而且修改体现在父组件中，并且`支持绑定多个 v-model`；而 vue2 中通过子组件的`model 属性中的prop值和event值`来指定属性名和事件名，修改体现在子组件中。
 
-接下来我们来看下一篇：《深入理解 vue 中 v-model 之修饰符》。
+接下来我们来看下一篇：{% post_link 深入理解v-model之修饰符 %}》。
