@@ -82,6 +82,10 @@ sudo docker run hello-world
 
 升级和安装是一样的步骤，只是选择不同的版本进行安装，请先执行[前提条件](#前提条件)。
 
+## 关于docker镜像加速
+
+点击查看：[阿里云官方镜像加速](https://help.aliyun.com/document_detail/60750.html)
+
 ## 参考
 
 [官方英文原文](https://docs.docker.com/engine/install/centos/)
