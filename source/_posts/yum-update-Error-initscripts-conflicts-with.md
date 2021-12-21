@@ -28,7 +28,7 @@ $ cat /etc/redhat-release
 
 貌似可以支持升级docker。
 
-于是我首先运行了`yum update` 或者 `yum upgrade`（具体是哪个，我不记得了。这中间可能有error，当时没在意，期初我也不知道update和upgrade的区别）。
+于是我首先运行了`yum update` 或者 `yum upgrade`（具体是哪个，我不记得了。这中间可能有error，当时没在意，起初我也不知道update和upgrade的区别）。
 
 [yum update和yum upgrade的真正区别](https://cloud.tencent.com/developer/article/1604418)：“yum update和yum upgrade的功能都是一样的，都是将需要更新的package更新到源中的最新版。唯一不同的是，yum upgrade会删除旧版本的package，而yum update则会保留(obsoletes=0)。生产环境中建议使用yum update，防止因为替换，导致旧的软件包依赖出现问题。”
 
@@ -168,6 +168,8 @@ round-trip min/avg/max = 173.943/173.943/173.943 ms
   "registry-mirrors": ["https://xxxxx.mirror.aliyuncs.com"]
 }
 ```
+
+> 关于Docker的阿里云镜像加速，可以到[这里查看](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)（需登录账号），也可以看看[这篇文章](https://developer.aliyun.com/article/29941)。
 
 ## 总结
 
